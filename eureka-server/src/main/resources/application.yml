@@ -1,0 +1,26 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl: # serviceUrl类型为Map<String, String>，配置集群则设置多个eureka地址即可
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+
+spring:
+  application:
+    name: eurka-server
+  security:
+    user:
+      name: admin
+      password: 2vWhSRXtJ4eeUJjZ
+
+logging:
+  level:
+    org:
+      springframework:
+        security: debug

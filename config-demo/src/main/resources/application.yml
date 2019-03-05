@@ -1,0 +1,16 @@
+server:
+  port: 9527
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${user.home}/config-repo
+          skip-ssl-validation: true
+          timeout: 4 #单位秒
+          username:
+          passphrase:
+  application:
+    name: config-server
+
+
