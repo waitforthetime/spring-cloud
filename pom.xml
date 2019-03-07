@@ -18,6 +18,9 @@
     <modules>
         <module>eureka-server</module>
         <module>config-demo</module>
+        <module>client-demo1</module>
+        <module>oauth2-server-demo</module>
+        <module>gateway-demo</module>
     </modules>
 
     <properties>

@@ -1,0 +1,24 @@
+server:
+  port: 9332
+spring:
+  application:
+    name: oauth2-server
+  security:
+    user:
+      password: password
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://admin:2vWhSRXtJ4eeUJjZ@localhost:8761/eureka

@@ -2,15 +2,20 @@ server:
   port: 8761
 
 eureka:
+#  instance:
+#    hostname: localhost
+#    prefer-ip-address: true
   instance:
-    hostname: localhost
     prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl: # serviceUrl类型为Map<String, String>，配置集群则设置多个eureka地址即可
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
-
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:${server.port}/eureka/
+#
 spring:
   application:
     name: eurka-server

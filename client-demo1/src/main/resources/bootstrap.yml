@@ -1,19 +1,21 @@
 server:
-  port: 9527
+  port: 9331
+
 spring:
   application:
-    name: config-server
+    name: client-demo1
   cloud:
     config:
-      server:
-        git:
-          uri: git@github.com:waitforthetime/configs.git
-          search-paths: /**
-          ignoreLocalSshSettings: true
-#          hostKey: github.com
-#          hostKeyAlgorithm: ssh-rsa
-          privateKey: |
-          # 私钥
+      discovery:
+        service-id: config-server
+        enabled: true
+      name: ${spring.application.name}
+      label: master
+      profile: default
+      fail-fast: true
+    discovery:
+      enabled: true
+
 
 
 eureka:
@@ -25,9 +27,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://admin:2vWhSRXtJ4eeUJjZ@localhost:8761/eureka
+debug: true
 management:
   endpoints:
     web:
       exposure:
         include: '*'
-debug: true
