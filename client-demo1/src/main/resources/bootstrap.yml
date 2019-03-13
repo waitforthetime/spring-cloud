@@ -1,5 +1,5 @@
-server:
-  port: 9331
+#server:
+#  port: 9331
 
 spring:
   application:
@@ -11,11 +11,11 @@ spring:
         enabled: true
       name: ${spring.application.name}
       label: master
-      profile: default
       fail-fast: true
     discovery:
       enabled: true
-
+  profiles:
+    active: gray
 
 
 eureka:
@@ -33,3 +33,22 @@ management:
     web:
       exposure:
         include: '*'
+
+
+---
+
+spring:
+  profiles: gray
+
+eureka:
+  instance:
+    metadata-map:
+      profile: gray
+server:
+  port: 9331
+---
+spring:
+  profiles: dev
+
+server:
+  port: 9333

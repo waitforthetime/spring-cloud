@@ -1,0 +1,59 @@
+server:
+  port: 9526
+spring:
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:mysql://localhost:3306/gateway?useSSL=false&autoReconnect=true&useUnicode=true&allowMultiQueries=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: Root123!
+    driverClassName: com.mysql.jdbc.Driver
+  application:
+    name: zuul-server
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://admin:2vWhSRXtJ4eeUJjZ@localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:mybatis-config.xml
+
+
+zuul:
+  servlet-path: /zuul
+  ribbon:
+    eager-load:
+      enabled: true
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:9332/user
+---
+
+spring:
+  profiles: dev
+
+name: wangda
+
+
+---
+
+
+spring:
+  profiles: test
+
+name: test

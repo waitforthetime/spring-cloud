@@ -13,8 +13,7 @@ spring:
 #          hostKey: github.com
 #          hostKeyAlgorithm: ssh-rsa
           privateKey: |
-          # 私钥
-
+          #密钥
 
 eureka:
   instance:

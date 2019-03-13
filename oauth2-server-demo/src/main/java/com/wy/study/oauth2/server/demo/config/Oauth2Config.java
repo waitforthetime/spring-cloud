@@ -93,7 +93,7 @@ public class Oauth2Config {
                     .scopes("read", "write")
                     .authorizedGrantTypes("authorization_code",
                             "password", "client_credentials", "implicit", "refresh_token")
-                    .resourceIds("oauth2server")
+                    .resourceIds("oauth2server", "zuul-server")
                     .secret("client_secret")
                     .authorities("ROLE_USER", "ROLE_WRITE");
         }

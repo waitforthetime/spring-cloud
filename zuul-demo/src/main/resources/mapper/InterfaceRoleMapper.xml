@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wy.study.zuul.demo.dao.mapper.InterfaceRoleMapper">
+
+    <resultMap id="resultMap" type="com.wy.study.zuul.demo.domain.po.InterfaceRolePO">
+        <id column="id" property="id"/>
+        <result column="application_route_id" property="applicationRouteId"/>
+        <result column="interface_path" property="interfacePath"/>
+        <result column="authority_id" property="authorityId"/>
+        <result column="desc" property="desc"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="add_time" property="addTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="tableName">
+        `interface_role`
+    </sql>
+
+    <sql id="allColumn">
+        id,
+        application_route_id,
+        interface_path,
+        authority_id,
+        `desc`,
+        record_status,
+        add_time,
+        modify_time
+    </sql>
+    
+    <select id="selectAll" resultMap="resultMap">
+        SELECT
+        <include refid="allColumn"/>
+        FROM
+        <include refid="tableName"/>
+        WHERE
+        record_status=1;
+    </select>
+
+</mapper>

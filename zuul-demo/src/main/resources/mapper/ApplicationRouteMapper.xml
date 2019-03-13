@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wy.study.zuul.demo.dao.mapper.ApplicationRouteMapper">
+    
+    
+    <resultMap id="resultMap" type="com.wy.study.zuul.demo.domain.po.ApplicationRoutePO">
+        <id column="id" property="id"/>
+        <result column="service_id" property="serviceId"/>
+        <result column="route_path" property="routePath"/>
+        <result column="route_url" property="url"/>
+        <result column="record_status" property="recordStatus"/>
+        <result column="add_time" property="addTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+
+    <sql id="tableName">
+        `application_route`
+    </sql>
+
+    <sql id="allColumn">
+        id,
+        service_id,
+        route_path,
+        record_status,
+        add_time,
+        modify_time
+    </sql>
+
+    <select id="selectAll" resultMap="resultMap">
+        SELECT
+        <include refid="allColumn"/>
+        FROM
+        <include refid="tableName"/>
+        WHERE
+        record_status=1;
+    </select>
+</mapper>
