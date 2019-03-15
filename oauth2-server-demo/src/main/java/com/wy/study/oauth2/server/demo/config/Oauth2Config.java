@@ -1,5 +1,7 @@
 package com.wy.study.oauth2.server.demo.config;
 
+import com.wy.study.oauth2.server.demo.oauth2.filter.CustomTokenEndpointFilter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -17,6 +19,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter;
 
 import javax.annotation.Resource;
 
@@ -30,6 +33,8 @@ import javax.annotation.Resource;
 @EnableAuthorizationServer
 public class Oauth2Config {
 
+//    @Resource
+//    private CustomTokenEndpointFilter customTokenEndpointFilter;
 
     @Bean
     public AuthorizationServerConfigurer authorizationServerConfigurer() {
@@ -68,6 +73,7 @@ public class Oauth2Config {
                         .mvcMatchers("/test/world").permitAll()
                         .mvcMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated();
+//            http.addFilterBefore(new CustomTokenEndpointFilter(), ClientCredentialsTokenEndpointFilter.class);
         }
     }
 
@@ -83,7 +89,8 @@ public class Oauth2Config {
             security.tokenKeyAccess("isAuthenticated()")
                     .checkTokenAccess("isAuthenticated()")
                     .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                    .allowFormAuthenticationForClients();
+                    .allowFormAuthenticationForClients()
+                    .addTokenEndpointAuthenticationFilter(new CustomTokenEndpointFilter());
         }
 
         @Override
